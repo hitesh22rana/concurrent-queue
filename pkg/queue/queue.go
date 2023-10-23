@@ -6,18 +6,18 @@ import (
 )
 
 type ConcurrentQueue struct {
-	queue []int32
+	queue []int
 	mu    sync.Mutex
 }
 
-func (cq *ConcurrentQueue) Enqueue(item int32) {
+func (cq *ConcurrentQueue) Enqueue(item int) {
 	cq.mu.Lock()
 	defer cq.mu.Unlock()
 
 	cq.queue = append(cq.queue, item)
 }
 
-func (cq *ConcurrentQueue) Dequeue() (int32, error) {
+func (cq *ConcurrentQueue) Dequeue() (int, error) {
 	cq.mu.Lock()
 	defer cq.mu.Unlock()
 
